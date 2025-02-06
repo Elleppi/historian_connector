@@ -1,0 +1,19 @@
+name: "ngn-follower"
+
+x-common-logging:
+  driver: "json-file"
+  options:
+    max-size: "100m"
+    max-file: "10"
+
+services:
+  # Sensor Follower
+  ngn_follower:
+    container_name: "ngn_follower"
+    image: elleppi/ngn_historian:latest
+    command: "python3 /home/ngn/main.py"
+    env_file:
+      - ".env"
+    restart: "always"
+    environment:
+      - TZ=Europe/London
